@@ -5,8 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab2D"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="800">
     <Grid>
-        
+        <Canvas x:Name="Scene" HorizontalAlignment="Left" Height="570" VerticalAlignment="Top" Width="703" />
+        <Button x:Name="Line" Content="Line" HorizontalAlignment="Left" VerticalAlignment="Top" Width="74" Margin="708,10,0,0" Click="Line_Click"/>
+        <Button x:Name="Ellipse" Content="Ellipse" HorizontalAlignment="Left" VerticalAlignment="Top" Width="74" Margin="708,37,0,0" Click="Ellipse_Click"/>
+        <Button x:Name="Rectangle" Content="Rectangle" HorizontalAlignment="Left" VerticalAlignment="Top" Width="74" Margin="708,64,0,0" Click="Rectangle_Click"/>
+        <Button x:Name="Polygon" Content="Polygon" HorizontalAlignment="Left" VerticalAlignment="Top" Width="74" Margin="708,91,0,0" Click="Polygon_Click"/>
+        <Button x:Name="Path" Content="Path" HorizontalAlignment="Left" VerticalAlignment="Top" Width="74" Margin="708,118,0,0" RenderTransformOrigin="-0.27,9.409" Click="Path_Click"/>
+        <Button x:Name="DanceB" Content="Dance" HorizontalAlignment="Left" VerticalAlignment="Top" Width="74" Margin="708,145,0,0" RenderTransformOrigin="-0.27,9.409" Click="DanceB_Click"/>
+
     </Grid>
 </Window>
