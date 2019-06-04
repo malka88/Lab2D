@@ -32,12 +32,20 @@ namespace Lab2D
         int currentFrame = 1, currentRow = 0, cr = 6;
         int frameW = 100, frameH = 100;
 
+
         public MainWindow()
         {
             InitializeComponent();
             Timer = new System.Windows.Threading.DispatcherTimer();
             Timer.Tick += new EventHandler(dispatcherTimer_Tick);
-            Timer.Interval = new TimeSpan(0, 0, 1);
+            Timer.Interval = new TimeSpan(0, 0, 0, 0, 120);
+            Scene.Focusable = true;
+
+            //Point pos = Mouse.GetPosition(Scene);
+            //Rect rect = myRect.RenderTransform.TransformBounds(myRect.RenderedGeometry.Bounds);
+            //if (rect.Contains(pos) == true) { MessageBox.Show("Точка входит в прямоугольник!"); }
+            //Rect ellipse = myEllipse.RenderTransform.TransformBounds(myEllipse.RenderedGeometry.Bounds);
+            //if (rect.IntersectsWith(ellipse) == true) { MessageBox.Show("Фигуры пересекаются!"); }
         }
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
@@ -78,6 +86,14 @@ namespace Lab2D
             Scene.Children.Remove(path);
         }
 
+        private void DMouseEnter(object sender, MouseEventArgs e)
+        {
+            Scene.Children.Remove(Dance);
+            Timer.Stop();
+            currentFrame = 1;
+            currentRow = 0;
+        }
+
         private void Line_Click(object sender, RoutedEventArgs e)
         {
             myLine.Stroke = System.Windows.Media.Brushes.Black;
@@ -102,8 +118,8 @@ namespace Lab2D
             myEllipse.Stroke = Brushes.Black;
             myEllipse.Width = 100;
             myEllipse.Height = 100;
-            myEllipse.Margin = new Thickness(150, 150, 0, 0);
-            myEllipse.MouseEnter += EMouseEnter;
+            myEllipse.Margin = new Thickness(200, 200, 0, 0);
+            //myEllipse.MouseEnter += EMouseEnter;
             Scene.Children.Add(myEllipse);
         }
 
@@ -117,15 +133,35 @@ namespace Lab2D
             ImageBrush ib = new ImageBrush();
             ib.AlignmentX = AlignmentX.Left;
             ib.AlignmentY = AlignmentY.Top;
-            ib.ImageSource = new BitmapImage(new Uri("C:\\Users\\Chudo\\source\\repos\\Lab2D\\Bogo.jpg", UriKind.Absolute));
+            ib.ImageSource = new BitmapImage(new Uri("C:\\Users\\Admin\\source\\repos\\Lab2D\\Bogo.jpg", UriKind.Absolute));
             myRect.Fill = ib;
             ib.Transform = new ScaleTransform(1.1, 1);
-            myRect.Margin = new Thickness(250, 250, 0, 0);
-            myRect.RenderTransform = new TranslateTransform(50, 50);
-            myRect.RenderTransform = new ScaleTransform(2, 0.5);
-            myRect.RenderTransform = new SkewTransform(-45, 0);
-            myRect.MouseEnter += RMouseEnter;
+
+            //myRect.Margin = new Thickness(250, 250, 0, 0);
+            myRect.RenderTransform = new TranslateTransform(250, 250);
+
+//            myRect.RenderTransform = new TranslateTransform(50, 50);
+//            myRect.RenderTransform = new ScaleTransform(2, 0.5);
+//            myRect.RenderTransform = new SkewTransform(-45, 0);
+            //myRect.MouseEnter += RMouseEnter;
             Scene.Children.Add(myRect);
+
+            Point pos = Mouse.GetPosition(Scene);
+            Rect rect = myRect.RenderTransform.TransformBounds(myRect.RenderedGeometry.Bounds);
+
+            if (rect.Contains(pos) == true) { MessageBox.Show("Точка входит в прямоугольник!"); }
+
+
+            Rect ellipse = myEllipse.RenderTransform.TransformBounds(myEllipse.RenderedGeometry.Bounds);
+            if (rect.IntersectsWith(ellipse) == true) { MessageBox.Show("Фигуры пересекаются!"); }
+        }
+
+        private void Window_MouseMove(object sender, MouseEventArgs e)
+        {
+            Point pos = Mouse.GetPosition(Scene);
+            Rect rect = myRect.RenderTransform.TransformBounds(myRect.RenderedGeometry.Bounds);
+
+            if (rect.Contains(pos) == true) { MessageBox.Show("Точка входит в прямоугольник!"); }
         }
 
         private void Polygon_Click(object sender, RoutedEventArgs e)
@@ -133,7 +169,7 @@ namespace Lab2D
             ImageBrush ib = new ImageBrush();
             ib.AlignmentX = AlignmentX.Left;
             ib.AlignmentY = AlignmentY.Top;
-            ib.ImageSource = new BitmapImage(new Uri("C:\\Users\\Chudo\\source\\repos\\Lab2D\\Bogo.jpg", UriKind.Absolute));
+            ib.ImageSource = new BitmapImage(new Uri("C:\\Users\\Admin\\source\\repos\\Lab2D\\Bogo.jpg", UriKind.Absolute));
             myPolygon.Stroke = Brushes.Black;
             myPolygon.Fill = ib;
             myPolygon.StrokeThickness = 2;
@@ -196,9 +232,10 @@ namespace Lab2D
             ib.Stretch = Stretch.None;
             ib.Viewbox = new Rect(0, 0, 100, 100);
             ib.ViewboxUnits = BrushMappingMode.Absolute;
-            ib.ImageSource = new BitmapImage(new Uri("C:\\Users\\Chudo\\source\\repos\\Lab2D\\VictoriaSprites.gif", UriKind.Absolute));
+            ib.ImageSource = new BitmapImage(new Uri("C:\\Users\\Admin\\source\\repos\\Lab2D\\VictoriaSprites.gif", UriKind.Absolute));
             Dance.Fill = ib;
             Dance.Margin = new Thickness(0, 0, 0, 0);
+            myLine.MouseEnter += DMouseEnter;
             Scene.Children.Add(Dance);
             Timer.Start();
         }
